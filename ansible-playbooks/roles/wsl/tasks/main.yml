@@ -1,0 +1,18 @@
+---
+- name: software-properties-commonのインストール
+  apt:
+    name:
+    - software-properties-common
+    update_cache: yes
+
+- name: リポジトリに ppa:ondrej/php を追加
+  apt_repository:
+    repo: ppa:ondrej/php
+
+- name: 各種パッケージのインストール
+  apt:
+    name:
+    - php-cli
+    - php-mbstring
+    - php7.2-cli
+    - php7.2-mbstring
