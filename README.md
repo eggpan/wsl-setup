@@ -7,11 +7,13 @@
 * APTリポジトリをjpに変更
 * aptitudeのインストール
 * Gitのインストール
-* language-pack-jaのインストール
 * pipのインストール
 * Ansibleのインストール  
 ※APTだとバージョンが若干古いのでpipで最新版Ansibleを入れてます
 
 以下はAnsibleで実行
-* APTリポジトリにppa:ondrej/phpを追加
-* PHP(最新 / 7.2)のインストール
+* APTリポジトリに php / docker / nodejs / yarn のリポジトリを追加
+* language-pack-jaのインストール
+* PHP8.0 のインストール
+* Node.js のインストール
+* Yarn のインストール
