@@ -14,7 +14,7 @@ sudo apt-get update && \
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
   -o Dpkg::Options::="--force-confdef" \
   -o Dpkg::Options::="--force-confold" \
-  aptitude git language-pack-ja python3-pip
+  aptitude git python3-pip
 pip3 install ansible
 
 # clone and execute playbook
