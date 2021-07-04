@@ -17,10 +17,10 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
   aptitude git language-pack-ja python3-pip
 pip3 install ansible
 
-# clone playbook and execute
+# clone and execute playbook
 tmpDir=$(mktemp -d)
 git clone https://github.com/eggpan/wsl-setup.git $tmpDir
-cd $tmpDir/ansible-playbooks
+cd $tmpDir/playbook
 $HOME/.local/bin/ansible-playbook -i ,localhost --connection=local -K setup_wsl.yml
 rm -rf $tmpDir
 
