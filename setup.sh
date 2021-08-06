@@ -23,7 +23,7 @@ sudo apt-get update \
 
 # clone and execute playbook
 tmpDir=$(mktemp -d)
-git clone https://github.com/eggpan/wsl-setup.git $tmpDir
+git clone git@github.com:eggpan/wsl-setup.git $tmpDir
 cd $tmpDir/playbook
 $HOME/.local/bin/ansible-playbook -i ,localhost --connection=local setup_wsl.yml
 rm -rf $tmpDir
