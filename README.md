@@ -1,19 +1,17 @@
-# WSL環境をセットアップするスクリプト
+## Script to set up a WSL environment
 
-## 使い方
+## Usage.
 `curl https://raw.githubusercontent.com/eggpan/wsl-setup/master/setup.sh | bash`
 
-## 実行内容
-* APTリポジトリをjpに変更
-* aptitudeのインストール
-* Gitのインストール
-* pipのインストール
-* Ansibleのインストール  
-※APTだとバージョンが若干古いのでpipで最新版Ansibleを入れてます
+## Execution details.
+* Change APT repository country
+* Install pip
+* Install whois
+* Install Ansible
+The version of APT is a bit old, so I used pip to install the latest version of Ansible.
 
-以下はAnsibleで実行
-* APTリポジトリに php / docker / nodejs / yarn のリポジトリを追加
-* language-pack-jaのインストール
-* PHP8.0 のインストール
-* Node.js のインストール
-* Yarn のインストール
+The following is executed by Ansible
+* Add php / docker / nodejs / yarn repositories to APT repository
+* Install PHP7.4 / PHP8.0
+* Install Node.js
+* Install Yarn
