@@ -1,7 +1,9 @@
+---
 - hosts:
-  - localhost
+    - localhost
   roles:
-  - role: wsl
+    - role: wsl_root
+      become: yes
   vars:
     ansible_python_interpreter: /usr/bin/python3
   become: yes

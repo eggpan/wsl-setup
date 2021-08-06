@@ -1,0 +1,13 @@
+---
+- name: install software-properties-common
+  apt:
+    name:
+      - software-properties-common
+    force_apt_get: yes
+    update_cache: yes
+
+- name: import task add_repositories
+  import_tasks: add_repositories.yml
+
+- name: import task install_packages
+  import_tasks: install_packages.yml
