@@ -11,3 +11,30 @@
 
 - name: import task install_packages
   import_tasks: install_packages.yml
+
+- name: enable ssl module
+  community.general.apache2_module:
+    name: ssl
+
+- name: copy apache2/sites-available/000-wsl.conf
+  copy:
+    src: 000-wsl.conf
+    dest: /etc/apache2/sites-available
+
+- name: check apache 000-default.conf
+  stat:
+    path: /etc/apache2/sites-enabled/000-default.conf
+  register: apache_default_conf
+
+- name: disable 000-default.conf
+  command: a2dissite 000-default.conf
+  when: apache_default_conf.stat.exists
+
+- name: check apache 000-wsl.conf
+  stat:
+    path: /etc/apache2/sites-enabled/000-wsl.conf
+  register: apache_wsl_conf
+
+- name: enable apache 000-wsl.conf
+  command: a2ensite 000-wsl.conf
+  when: not apache_wsl_conf.stat.exists

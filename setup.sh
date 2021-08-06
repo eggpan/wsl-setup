@@ -18,7 +18,8 @@ sudo apt-get update \
   -o Dpkg::Options::="--force-confdef" \
   -o Dpkg::Options::="--force-confold" \
   git python3-pip \
-&& pip3 install ansible
+&& pip3 install ansible \
+&& $HOME/.local/bin/ansible-galaxy collection install community.general
 
 # clone and execute playbook
 tmpDir=$(mktemp -d)
