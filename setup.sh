@@ -14,22 +14,17 @@ if [ $? -ne 0 ]; then
   echo "${USER} ALL=NOPASSWD: ALL" | sudo EDITOR='tee -a' visudo
 fi
 
-# install ansible / whois
+# install ansible
 sudo apt-get update \
 && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
   -o Dpkg::Options::="--force-confdef" \
   -o Dpkg::Options::="--force-confold" \
-  python3-pip whois \
+  python3-pip \
 && pip3 install ansible \
 && "${HOME}/.local/bin/ansible-galaxy" collection install community.general
 
 # set apt repositories
-country=$(whois $(curl -s checkip.amazonaws.com) | \
-  grep country | \
-  head -n 1 | \
-  awk '{print $2}' | \
-  tr '[A-Z]' '[a-z]'
-)
+country=$(curl -sL http://rdap.apnic.net/ip/$(curl -s checkip.amazonaws.com) | sed 's/.*"country":"\(..\).*/\L\1/')
 sudo sed -i "s#//\(archive\.ubuntu\.com\)#//${country}.\1#" /etc/apt/sources.list
 
 # clone and execute playbook

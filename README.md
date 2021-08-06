@@ -6,7 +6,6 @@
 ## Execution details.
 * Change APT repository country
 * Install pip
-* Install whois
 * Install Ansible
 The version of APT is a bit old, so I used pip to install the latest version of Ansible.
 
