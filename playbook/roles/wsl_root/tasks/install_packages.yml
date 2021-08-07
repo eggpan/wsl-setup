@@ -4,6 +4,7 @@
     name:
       - apache2
       - docker-ce
+      - mariadb-server
       - nodejs
       - php7.4-bcmath
       - php7.4-cli

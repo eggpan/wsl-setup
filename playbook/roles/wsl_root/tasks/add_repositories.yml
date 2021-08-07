@@ -29,3 +29,12 @@
   apt_repository:
     repo: deb https://dl.yarnpkg.com/debian/ stable main
     filename: yarn
+
+- name: add mariadb key
+  apt_key:
+    url: https://mariadb.org/mariadb_release_signing_key.asc
+
+- name: add mariadb repository
+  apt_repository:
+    repo: deb [arch=amd64,arm64,ppc64el] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.6/ubuntu focal main
+    filename: mariadb
