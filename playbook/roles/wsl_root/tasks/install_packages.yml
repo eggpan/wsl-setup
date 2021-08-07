@@ -1,9 +1,9 @@
 ---
-- name: install packages
+- name: install apt packages
   apt:
     name:
       - apache2
-      - language-pack-ja
+      - docker-ce
       - nodejs
       - php7.4-bcmath
       - php7.4-cli
@@ -47,6 +47,13 @@
       - php8.0-sqlite3
       - php8.0-xml
       - php8.0-zip
+      - postfix
       - yarn
     force_apt_get: yes
     update_cache: yes
+
+- name: add current user to docker group
+  ansible.builtin.user:
+    name: "{{ ansible_env['USER'] }}"
+    groups: docker
+    append: yes
