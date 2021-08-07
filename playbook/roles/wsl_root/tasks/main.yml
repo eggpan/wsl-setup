@@ -4,6 +4,7 @@
 
 - name: import task install_packages
   import_tasks: install_packages.yml
+  tags: install
 
 - name: enable ssl module
   community.general.apache2_module:
