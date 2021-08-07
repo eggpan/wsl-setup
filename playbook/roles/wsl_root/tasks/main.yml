@@ -38,10 +38,16 @@
 
 - name: changed php-fpm user
   community.general.ini_file:
-    path: '{{ item }}'
+    path: '{{ item.conf }}'
     section: www
-    option: user
+    option: '{{ item.option }}'
     value: "{{ ansible_env['USER'] }}"
   loop:
-    - /etc/php/7.4/fpm/pool.d/www.conf
-    - /etc/php/8.0/fpm/pool.d/www.conf
+    - conf: /etc/php/7.4/fpm/pool.d/www.conf
+      option: user
+    - conf: /etc/php/7.4/fpm/pool.d/www.conf
+      option: listen.owner
+    - conf: /etc/php/8.0/fpm/pool.d/www.conf
+      option: user
+    - conf: /etc/php/8.0/fpm/pool.d/www.conf
+      option: listen.owner
