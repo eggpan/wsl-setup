@@ -4,6 +4,6 @@
   roles:
     - role: wsl_root
       become: yes
+    - role: wsl_user
   vars:
     ansible_python_interpreter: /usr/bin/python3
-  become: yes
