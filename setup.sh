@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-codename=$(lsb_release -cs)
+codename=$(sed -n '/DISTRIB_CODENAME/p' /etc/lsb-release | cut -d'=' -f2)
 if [ "${codename}" != "focal" ]; then
   echo "error: this script is only for ubuntu 20.04." 1>&2
   exit 1
