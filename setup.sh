@@ -20,8 +20,9 @@ sudo apt-get update \
   -o Dpkg::Options::="--force-confdef" \
   -o Dpkg::Options::="--force-confold" \
   python3-pip \
-&& pip3 install ansible \
-&& "${HOME}/.local/bin/ansible-galaxy" collection install community.general
+&& pip install --user ansible \
+&& source "${HOME}/.profile" \
+&& ansible-galaxy collection install community.general
 
 # set apt repositories
 country=$(curl -sL http://rdap.apnic.net/ip/$(curl -s checkip.amazonaws.com) | sed 's/.*"country":"\(..\).*/\L\1/')
@@ -31,7 +32,7 @@ sudo sed -i "s#//\(archive\.ubuntu\.com\)#//${country}.\1#" /etc/apt/sources.lis
 tmpDir=$(mktemp -d)
 git clone git@github.com:eggpan/wsl-setup.git "${tmpDir}"
 cd "${tmpDir}/playbook"
-"${HOME}/.local/bin/ansible-playbook" -i ,localhost --connection=local setup_wsl.yml
+ansible-playbook -i ,localhost --connection=local setup_wsl.yml
 rm -rf "${tmpDir}"
 
 cd "${currentDir}"
