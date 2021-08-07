@@ -10,6 +10,8 @@
     path: ~/.profile
     block: |
       [ ! -f /var/run/apache2/apache2.pid ] && sudo service apache2 restart
+      [ ! -f /var/run/php/php7.4-fpm.pid ] && sudo service php7.4-fpm restart
+      [ ! -f /var/run/php/php8.0-fpm.pid ] && sudo service php8.0-fpm restart
       [ ! -f /var/run/mysqld/mysqld.pid ] && sudo service mariadb restart
       [ ! -f /var/run/rsyslogd.pid ] && sudo service rsyslog restart
       [ ! $(pgrep master) ] && sudo service postfix restart

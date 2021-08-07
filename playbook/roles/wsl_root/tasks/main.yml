@@ -6,9 +6,12 @@
   import_tasks: install_packages.yml
   tags: install
 
-- name: enable ssl module
+- name: enable proxy_fcgi, ssl module
   community.general.apache2_module:
-    name: ssl
+    name: '{{ item }}'
+  loop:
+    - proxy_fcgi
+    - ssl
 
 - name: copy apache2/sites-available/000-wsl.conf
   copy:
@@ -30,5 +33,15 @@
   register: apache_wsl_conf
 
 - name: enable apache 000-wsl.conf
-  command: a2ensite 000-wsl.conf
+  command: a2ensite 000-wsl
   when: not apache_wsl_conf.stat.exists
+
+- name: changed php-fpm user
+  community.general.ini_file:
+    path: '{{ item }}'
+    section: www
+    option: user
+    value: "{{ ansible_env['USER'] }}"
+  loop:
+    - /etc/php/7.4/fpm/pool.d/www.conf
+    - /etc/php/8.0/fpm/pool.d/www.conf
