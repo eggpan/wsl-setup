@@ -32,7 +32,7 @@ sudo sed -i "s#//\(archive\.ubuntu\.com\)#//${country}.\1#" /etc/apt/sources.lis
 tmpDir=$(mktemp -d)
 git clone git@github.com:eggpan/wsl-setup.git "${tmpDir}"
 cd "${tmpDir}/playbook"
-ansible-playbook -i ,localhost --connection=local setup_wsl.yml
+ansible-playbook -i ,localhost -c=local setup_wsl.yml
 rm -rf "${tmpDir}"
 
 cd "${currentDir}"
