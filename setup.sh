@@ -22,7 +22,7 @@ sudo apt-get update \
   python3-pip \
 && pip install --user ansible \
 && source "${HOME}/.profile" \
-&& ansible-galaxy collection install community.general
+&& ansible-galaxy collection install community.general community.mysql
 
 # set apt repositories
 country=$(curl -sL http://rdap.apnic.net/ip/$(curl -s checkip.amazonaws.com) | sed 's/.*"country":"\(..\).*/\L\1/')
