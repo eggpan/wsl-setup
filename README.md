@@ -1,16 +1,22 @@
-## Script to set up a WSL environment
+## Script to set up the development environment for WSL2.
 
-## Usage.
-`curl https://raw.githubusercontent.com/eggpan/wsl-setup/master/setup.sh | bash`
+## Usage
+`curl https://raw.githubusercontent.com/eggpan/wsl-setup/main/setup.sh | bash`
 
-## Execution details.
-* Change APT repository country
-* Install pip
-* Install Ansible
-The version of APT is a bit old, so I used pip to install the latest version of Ansible.
+## Execution details
+- Change the configuration so that the user executing the command can run sudo without a password
+- Change the country of the apt repository
+- Install pip
+- Install Ansible
+(The version of apt is a bit old, so we will use pip to install the latest version of Ansible)
 
-The following is executed by Ansible
-* Add php / docker / nodejs / yarn repositories to APT repository
-* Install PHP7.4 / PHP8.0
-* Install Node.js
-* Install Yarn
+Run the following in Ansible
+- Add PHP / Docker / Google Chrome / MariaDB / Node.js / Yarn repositories to apt repository
+- Install docker-ce
+  - Add docker command execution permissions to the executing user
+- Install Apache
+- Install MariaDB
+- Install Postfix
+- Install PHP7.4 / PHP8.0
+- Install Node.js
+- Install Yarn

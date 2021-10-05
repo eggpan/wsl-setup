@@ -26,6 +26,8 @@
       - php7.4-redis
       - php7.4-soap
       - php7.4-sqlite3
+      - php7.4-tidy
+      - php7.4-xdebug
       - php7.4-xml
       - php7.4-zip
       - php8.0-bcmath
@@ -47,6 +49,8 @@
       - php8.0-redis
       - php8.0-soap
       - php8.0-sqlite3
+      - php8.0-tidy
+      - php8.0-xdebug
       - php8.0-xml
       - php8.0-zip
       - postfix

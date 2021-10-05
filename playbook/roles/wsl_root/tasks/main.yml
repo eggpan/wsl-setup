@@ -36,7 +36,7 @@
   command: a2ensite 000-wsl
   when: not apache_wsl_conf.stat.exists
 
-- name: changed php-fpm user
+- name: changed php-fpm user to current user
   community.general.ini_file:
     path: '{{ item.conf }}'
     section: www

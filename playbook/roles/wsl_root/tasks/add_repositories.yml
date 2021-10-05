@@ -36,5 +36,14 @@
 
 - name: add mariadb repository
   apt_repository:
-    repo: deb [arch=amd64,arm64,ppc64el] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.6/ubuntu focal main
+    repo: "deb [arch=amd64,arm64,ppc64el] http://sfo1.mirrors.digitalocean.com/mariadb/repo/{{ mariadb_version }}/ubuntu focal main"
     filename: mariadb
+
+- name: add google GPG key
+  ansible.builtin.apt_key:
+    url: https://dl-ssl.google.com/linux/linux_signing_key.pub
+
+- name: add google chrome repository
+  ansible.builtin.apt_repository:
+    repo: deb http://dl.google.com/linux/chrome/deb/ stable main
+    filename: chrome
