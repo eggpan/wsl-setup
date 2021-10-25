@@ -1,9 +1,9 @@
 ---
 - name: import task add_repositories
-  import_tasks: add_repositories.yml
+  ansible.builtin.import_tasks: add_repositories.yml
 
 - name: import task install_packages
-  import_tasks: install_packages.yml
+  ansible.builtin.import_tasks: install_packages.yml
   tags: install
 
 - name: enable proxy_fcgi, ssl module
@@ -11,29 +11,30 @@
     name: '{{ item }}'
   loop:
     - proxy_fcgi
+    - rewrite
     - ssl
 
 - name: copy apache2/sites-available/000-wsl.conf
-  copy:
+  ansible.builtin.copy:
     src: 000-wsl.conf
     dest: /etc/apache2/sites-available
 
 - name: check apache 000-default.conf
-  stat:
+  ansible.builtin.stat:
     path: /etc/apache2/sites-enabled/000-default.conf
   register: apache_default_conf
 
 - name: disable 000-default.conf
-  command: a2dissite 000-default.conf
+  ansible.builtin.command: a2dissite 000-default.conf
   when: apache_default_conf.stat.exists
 
 - name: check apache 000-wsl.conf
-  stat:
+  ansible.builtin.stat:
     path: /etc/apache2/sites-enabled/000-wsl.conf
   register: apache_wsl_conf
 
 - name: enable apache 000-wsl.conf
-  command: a2ensite 000-wsl
+  ansible.builtin.command: a2ensite 000-wsl
   when: not apache_wsl_conf.stat.exists
 
 - name: changed php-fpm user to current user

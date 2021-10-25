@@ -26,7 +26,9 @@ sudo apt-get update \
 
 # set apt repositories
 country=$(curl -sL http://rdap.apnic.net/ip/$(curl -s checkip.amazonaws.com) | sed 's/.*"country":"\(..\).*/\L\1/')
-sudo sed -i "s#//\(archive\.ubuntu\.com\)#//${country}.\1#" /etc/apt/sources.list
+if [ -n "$country" ]; then
+  sudo sed -i "s#//\(archive\.ubuntu\.com\)#//${country}.\1#" /etc/apt/sources.list
+fi
 
 # clone and execute playbook
 tmpDir=$(mktemp -d)

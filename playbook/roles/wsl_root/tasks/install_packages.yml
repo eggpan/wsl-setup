@@ -1,6 +1,6 @@
 ---
 - name: install apt packages
-  apt:
+  ansible.builtin.apt:
     name:
       - apache2
       - docker-ce
