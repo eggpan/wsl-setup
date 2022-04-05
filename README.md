@@ -15,8 +15,8 @@ Run the following in Ansible
 - Install docker-ce
   - Add docker command execution permissions to the executing user
 - Install Apache
-- Install MariaDB
+- Install MySQL
 - Install Postfix
-- Install PHP7.4 / PHP8.0
+- Install PHP7.4 / PHP8.0 / PHP8.1
 - Install Node.js
 - Install Yarn
