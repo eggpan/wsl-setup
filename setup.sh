@@ -1,14 +1,14 @@
 #!/bin/bash -e
 
 codename=$(sed -n '/DISTRIB_CODENAME/p' /etc/lsb-release | cut -d'=' -f2)
-if [ "${codename}" != "focal" ]; then
-  echo "error: this script is only for ubuntu 20.04." 1>&2
+if [ "${codename}" != "jammy" ]; then
+  echo "error: this script is only for ubuntu 22.04." 1>&2
   exit 1
 fi
 
 currentDir="${PWD}"
 
-# add sudo user
+# add current user in sudoers
 sudo grep "${USER}" /etc/sudoers >/dev/null 2>/dev/null && :
 if [ $? -ne 0 ]; then
   echo "${USER} ALL=NOPASSWD: ALL" | sudo EDITOR='tee -a' visudo
@@ -22,12 +22,13 @@ sudo apt-get update \
   python3-pip \
 && pip install --user ansible \
 && source "${HOME}/.profile" \
-&& ansible-galaxy collection install community.general community.mysql
+&& ansible-galaxy collection install community.general
 
 # set apt repositories
 country=$(curl -sL http://rdap.apnic.net/ip/$(curl -s checkip.amazonaws.com) | sed 's/.*"country":"\(..\).*/\L\1/')
 if [ -n "$country" ]; then
   sudo sed -i "s#//\(archive\.ubuntu\.com\)#//${country}.\1#" /etc/apt/sources.list
+  echo "set country in apt repository to ${country}."
 fi
 
 # clone and execute playbook

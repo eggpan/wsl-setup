@@ -1,0 +1,84 @@
+version: "3.9"
+services:
+  workspace:
+    container_name: workspace
+    build:
+      context: ./build/workspace
+    environment:
+      - TZ=UTC
+    volumes:
+      - $HOME/go:/home/user/go
+    volumes_from:
+      - apache
+    restart: always
+
+  apache:
+    container_name: apache
+    build: ./build/apache
+    environment:
+      - TZ=UTC
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - $HOME:/app/home
+      - ./build/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+    restart: always
+
+  php7.4:
+    container_name: php7.4
+    build:
+      context: ./build/php
+      args:
+        - INSTALL_PHP_VERSION=7.4
+        - INSTALL_XDEBUG_VERSION=xdebug-2.9.8
+        - TIMEZONE=UTC
+    environment:
+      - TZ=UTC
+    volumes_from:
+      - apache
+    restart: always
+
+  php8.0:
+    container_name: php8.0
+    build:
+      context: ./build/php
+      args:
+        - INSTALL_PHP_VERSION=8.0
+        - TIMEZONE=UTC
+    environment:
+      - TZ=UTC
+    volumes_from:
+      - apache
+    restart: always
+
+  php8.1:
+    container_name: php8.1
+    build:
+      context: ./build/php
+      args:
+        - TIMEZONE=UTC
+    environment:
+      - TZ=UTC
+    volumes_from:
+      - apache
+    restart: always
+
+  # redis
+  redis:
+    container_name: redis
+    image: redis:7.0-alpine
+    ports:
+      - '6379:6379'
+    restart: always
+
+  # mysql
+  mysql:
+    container_name: mysql
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_USER=root
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    restart: always
