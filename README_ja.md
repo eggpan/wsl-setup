@@ -11,12 +11,6 @@
 (aptのバージョンが少し古いので、pipを使って最新版のAnsibleをインストールします)
 
 Ansibleで以下を実行します。
-- aptリポジトリに PHP / Docker / Google Chrome / MariaDB / Node.js / Yarn のリポジトリを追加
+- aptリポジトリに Docker / Google Chrome のリポジトリを追加
 - docker-ceをインストール
   - 実行ユーザーにdockerコマンド実行権限を追加
-- Apacheをインストール
-- MariaDBをインストール
-- Postfixをインストール
-- PHP7.4 / PHP8.0をインストール
-- Node.jsをインストール
-- Yarnをインストール
