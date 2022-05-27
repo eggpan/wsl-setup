@@ -5,6 +5,8 @@ RUN apk add --no-cache \
         curl \
         git \
         go \
+        mariadb-client \
+        mariadb-connector-c \
         npm \
         php81 \
         php81-bcmath \
