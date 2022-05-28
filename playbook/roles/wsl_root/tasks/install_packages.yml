@@ -1,5 +1,5 @@
 ---
-- name: define apt packages
+- name: Install apt packages
   ansible.builtin.apt:
     name:
       - docker-ce
@@ -8,7 +8,7 @@
       - unzip
       - zip
 
-- name: add current user to docker group
+- name: Add current user to docker group
   ansible.builtin.user:
     name: "{{ ansible_env['USER'] }}"
     groups: docker

@@ -1,18 +1,18 @@
 
 ---
-- name: add docker GPG key
+- name: Add docker GPG key
   ansible.builtin.apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
 
-- name: add docker repository
+- name: Add docker repository
   ansible.builtin.apt_repository:
     repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
 
-- name: add google GPG key
+- name: Add google GPG key
   ansible.builtin.apt_key:
     url: https://dl-ssl.google.com/linux/linux_signing_key.pub
 
-- name: add google chrome repository
+- name: Add google chrome repository
   ansible.builtin.apt_repository:
     repo: deb http://dl.google.com/linux/chrome/deb/ stable main
     filename: chrome

@@ -1,7 +1,7 @@
 ---
-- name: import task add_repositories
+- name: Import task add_repositories
   ansible.builtin.import_tasks: add_repositories.yml
 
-- name: import task install_packages
+- name: Import task install_packages
   ansible.builtin.import_tasks: install_packages.yml
   tags: install
