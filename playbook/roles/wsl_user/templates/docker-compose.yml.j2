@@ -16,11 +16,11 @@ services:
   php7.4:
     container_name: php7.4
     build:
-      context: ./build/php
+      context: ./build/php7.4
       args:
-        - INSTALL_PHP_VERSION=7.4
-        - INSTALL_XDEBUG_VERSION=xdebug-2.9.8
         - TIMEZONE={{ result_timezone.stdout }}
+        - WWWUSER=1000
+        - WWWGROUP=1000
     environment:
       - TZ={{ result_timezone.stdout }}
     volumes_from:
@@ -30,10 +30,11 @@ services:
   php8.0:
     container_name: php8.0
     build:
-      context: ./build/php
+      context: ./build/php8.0
       args:
-        - INSTALL_PHP_VERSION=8.0
         - TIMEZONE={{ result_timezone.stdout }}
+        - WWWUSER=1000
+        - WWWGROUP=1000
     environment:
       - TZ={{ result_timezone.stdout }}
     volumes_from:
@@ -43,9 +44,11 @@ services:
   php8.1:
     container_name: php8.1
     build:
-      context: ./build/php
+      context: ./build/php8.1
       args:
         - TIMEZONE={{ result_timezone.stdout }}
+        - WWWUSER=1000
+        - WWWGROUP=1000
     environment:
       - TZ={{ result_timezone.stdout }}
     volumes_from:
