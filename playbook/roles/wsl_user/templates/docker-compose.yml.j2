@@ -1,22 +1,10 @@
 version: "3.9"
 services:
-  workspace:
-    container_name: workspace
-    build:
-      context: ./build/workspace
-    environment:
-      - TZ=UTC
-    volumes:
-      - $HOME/go:/home/user/go
-    volumes_from:
-      - apache
-    restart: always
-
   apache:
     container_name: apache
     build: ./build/apache
     environment:
-      - TZ=UTC
+      - TZ={{ result_timezone.stdout }}
     ports:
       - '80:80'
       - '443:443'
@@ -32,9 +20,9 @@ services:
       args:
         - INSTALL_PHP_VERSION=7.4
         - INSTALL_XDEBUG_VERSION=xdebug-2.9.8
-        - TIMEZONE=UTC
+        - TIMEZONE={{ result_timezone.stdout }}
     environment:
-      - TZ=UTC
+      - TZ={{ result_timezone.stdout }}
     volumes_from:
       - apache
     restart: always
@@ -45,9 +33,9 @@ services:
       context: ./build/php
       args:
         - INSTALL_PHP_VERSION=8.0
-        - TIMEZONE=UTC
+        - TIMEZONE={{ result_timezone.stdout }}
     environment:
-      - TZ=UTC
+      - TZ={{ result_timezone.stdout }}
     volumes_from:
       - apache
     restart: always
@@ -57,9 +45,9 @@ services:
     build:
       context: ./build/php
       args:
-        - TIMEZONE=UTC
+        - TIMEZONE={{ result_timezone.stdout }}
     environment:
-      - TZ=UTC
+      - TZ={{ result_timezone.stdout }}
     volumes_from:
       - apache
     restart: always
@@ -81,4 +69,16 @@ services:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - ./data/mysql:/var/lib/mysql
+    restart: always
+
+  workspace:
+    container_name: workspace
+    build:
+      context: ./build/workspace
+    environment:
+      - TZ={{ result_timezone.stdout }}
+    volumes:
+      - $HOME/go:/home/user/go
+    volumes_from:
+      - apache
     restart: always
