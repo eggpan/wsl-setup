@@ -1,49 +1,18 @@
 
 ---
-- name: add php repository
-  ansible.builtin.apt_repository:
-    repo: ppa:ondrej/php
-
-- name: add docker GPG key
+- name: Add docker GPG key
   ansible.builtin.apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
 
-- name: add docker repository
+- name: Add docker repository
   ansible.builtin.apt_repository:
     repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
 
-- name: add nodejs GPG key
-  ansible.builtin.apt_key:
-    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
-
-- name: add nodejs repository
-  ansible.builtin.apt_repository:
-    repo: "deb https://deb.nodesource.com/node_{{ nodejs_version }}.x focal main"
-    filename: nodesource
-
-- name: add yarn GPG key
-  ansible.builtin.apt_key:
-    url: https://dl.yarnpkg.com/debian/pubkey.gpg
-
-- name: add yarn repository
-  ansible.builtin.apt_repository:
-    repo: deb https://dl.yarnpkg.com/debian/ stable main
-    filename: yarn
-
-- name: add mariadb key
-  ansible.builtin.apt_key:
-    url: https://mariadb.org/mariadb_release_signing_key.asc
-
-- name: add mariadb repository
-  ansible.builtin.apt_repository:
-    repo: "deb [arch=amd64,arm64,ppc64el] http://sfo1.mirrors.digitalocean.com/mariadb/repo/{{ mariadb_version }}/ubuntu focal main"
-    filename: mariadb
-
-- name: add google GPG key
+- name: Add google GPG key
   ansible.builtin.apt_key:
     url: https://dl-ssl.google.com/linux/linux_signing_key.pub
 
-- name: add google chrome repository
+- name: Add google chrome repository
   ansible.builtin.apt_repository:
     repo: deb http://dl.google.com/linux/chrome/deb/ stable main
     filename: chrome

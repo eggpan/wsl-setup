@@ -1,54 +1,14 @@
 ---
-- name: define apt packages
-  ansible.builtin.set_fact:
-    apt_packages:
-      - apache2
+- name: Install apt packages
+  ansible.builtin.apt:
+    name:
       - docker-ce
       - git-crypt
       - jq
-      - mysql-server
-      - postfix
       - unzip
       - zip
 
-- name: define php packages
-  ansible.builtin.set_fact:
-    'php{{ item.key }}_packages':
-      - 'php{{ item.value }}-bcmath'
-      - 'php{{ item.value }}-cli'
-      - 'php{{ item.value }}-curl'
-      - 'php{{ item.value }}-dev'
-      - 'php{{ item.value }}-fpm'
-      - 'php{{ item.value }}-gd'
-      - 'php{{ item.value }}-igbinary'
-      - 'php{{ item.value }}-intl'
-      - 'php{{ item.value }}-mbstring'
-      - 'php{{ item.value }}-memcached'
-      - 'php{{ item.value }}-msgpack'
-      - 'php{{ item.value }}-mysql'
-      - 'php{{ item.value }}-pgsql'
-      - 'php{{ item.value }}-readline'
-      - 'php{{ item.value }}-redis'
-      - 'php{{ item.value }}-sqlite3'
-      - 'php{{ item.value }}-tidy'
-      - 'php{{ item.value }}-xdebug'
-      - 'php{{ item.value }}-xml'
-      - 'php{{ item.value }}-zip'
-  loop:
-    - key: '74'
-      value: '7.4'
-    - key: '80'
-      value: '8.0'
-    - key: '81'
-      value: '8.1'
-
-- name: install apt packages
-  ansible.builtin.apt:
-    name: '{{ apt_packages + php74_packages + php80_packages + php81_packages}}'
-    force_apt_get: yes
-    update_cache: yes
-
-- name: add current user to docker group
+- name: Add current user to docker group
   ansible.builtin.user:
     name: "{{ ansible_env['USER'] }}"
     groups: docker

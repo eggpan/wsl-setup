@@ -1,19 +1,15 @@
 ---
-- name: install docker-compose
-  pip:
-    name:
-      - docker-compose
-  tags: install
+- name: Copy files for docker
+  ansible.builtin.copy:
+    src: docker
+    dest: $HOME
 
-- name: add PATH and services autostart script to .profile
-  blockinfile:
-    path: ~/.profile
-    block: |
-      export PATH="$(yarn global bin):$PATH"
-      [ ! -f /var/run/apache2/apache2.pid ] && sudo service apache2 start
-      [ ! -f /var/run/php/php7.4-fpm.pid ] && sudo service php7.4-fpm start
-      [ ! -f /var/run/php/php8.0-fpm.pid ] && sudo service php8.0-fpm start
-      [ ! -f /var/run/php/php8.1-fpm.pid ] && sudo service php8.1-fpm start
-      [ ! -f /var/run/mysqld/mysqld.pid ] && sudo service mariadb start
-      [ ! -f /var/run/rsyslogd.pid ] && sudo service rsyslog start
-      [ ! $(pgrep master) ] && sudo service postfix start
+- name: Get current timezon
+  ansible.builtin.command: cat /etc/timezone
+  register: result_timezone
+  changed_when: no
+
+- name: Copy docker-compose.yml
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: $HOME/docker/docker-compose.yml
