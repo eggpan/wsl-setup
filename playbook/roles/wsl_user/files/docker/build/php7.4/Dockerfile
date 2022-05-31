@@ -9,6 +9,8 @@ RUN apk add --no-cache \
         php7-bcmath \
         php7-curl \
         php7-dev \
+        php7-dom \
+        php7-fileinfo \
         php7-fpm \
         php7-gd \
         php7-imap \
@@ -30,7 +32,10 @@ RUN apk add --no-cache \
         php7-phar \
         php7-soap \
         php7-sqlite3 \
+        php7-tokenizer \
         php7-xml \
+        php7-xmlreader \
+        php7-xmlwriter \
         php7-zip
 
 RUN sed -ri \

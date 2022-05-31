@@ -12,6 +12,8 @@ RUN apk add --no-cache \
         php81-bcmath \
         php81-curl \
         php81-dev \
+        php81-dom \
+        php81-fileinfo \
         php81-gd \
         php81-imap \
         php81-intl \
@@ -33,7 +35,10 @@ RUN apk add --no-cache \
         php81-phar \
         php81-soap \
         php81-sqlite3 \
+        php81-tokenizer \
         php81-xml \
+        php81-xmlreader \
+        php81-xmlwriter \
         php81-zip \
         tzdata \
     && ln -s /usr/bin/php81 /usr/bin/php \

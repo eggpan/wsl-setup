@@ -9,6 +9,8 @@ RUN apk add --no-cache \
         php8-bcmath \
         php8-curl \
         php8-dev \
+        php8-dom \
+        php8-fileinfo \
         php8-fpm \
         php8-gd \
         php8-imap \
@@ -31,7 +33,10 @@ RUN apk add --no-cache \
         php8-phar \
         php8-soap \
         php8-sqlite3 \
+        php8-tokenizer \
         php8-xml \
+        php8-xmlreader \
+        php8-xmlwriter \
         php8-zip
 
 RUN sed -ri \
