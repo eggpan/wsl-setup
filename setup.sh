@@ -33,7 +33,7 @@ fi
 
 # clone and execute playbook
 tmpDir=$(mktemp -d)
-git clone git@github.com:eggpan/wsl-setup.git "${tmpDir}"
+git clone https://github.com/eggpan/wsl-setup.git "${tmpDir}"
 cd "${tmpDir}/playbook"
 ansible-playbook -i ,localhost -c=local setup_wsl.yml
 rm -rf "${tmpDir}"

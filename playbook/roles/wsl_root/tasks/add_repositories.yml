@@ -1,18 +1,33 @@
 
 ---
+- name: Create keyrings directory
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+
+- name: Get architecture
+  ansible.builtin.command: dpkg --print-architecture
+  register: architecture
+  changed_when: no
+
 - name: Add docker GPG key
   ansible.builtin.apt_key:
+    id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
     url: https://download.docker.com/linux/ubuntu/gpg
+    keyring: /etc/apt/keyrings/docker.gpg
 
 - name: Add docker repository
   ansible.builtin.apt_repository:
-    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    repo: "deb [arch={{ architecture.stdout }} signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    filename: docker
 
 - name: Add google GPG key
   ansible.builtin.apt_key:
+    id: 4CCA1EAF950CEE4AB83976DCA040830F7FAC5991
     url: https://dl-ssl.google.com/linux/linux_signing_key.pub
+    keyring: /etc/apt/keyrings/docker.gpg
 
 - name: Add google chrome repository
   ansible.builtin.apt_repository:
-    repo: deb http://dl.google.com/linux/chrome/deb/ stable main
+    repo: deb [signed-by=/etc/apt/keyrings/docker.gpg] https://dl.google.com/linux/chrome/deb/ stable main
     filename: chrome
