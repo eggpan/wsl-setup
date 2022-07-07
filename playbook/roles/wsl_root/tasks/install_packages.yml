@@ -1,4 +1,9 @@
 ---
+- name: Change iptables to legacy (for docker)
+  community.general.alternatives:
+    name: iptables
+    path: /usr/sbin/iptables-legacy
+
 - name: Install apt packages
   ansible.builtin.apt:
     name:
