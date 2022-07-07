@@ -4,7 +4,7 @@
     src: docker
     dest: $HOME
 
-- name: Get current timezon
+- name: Get current timezone
   ansible.builtin.command: cat /etc/timezone
   register: result_timezone
   changed_when: no
